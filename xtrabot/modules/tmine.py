@@ -5,7 +5,7 @@ TCOIN = -1001394158904
 
 @loader.command(incoming=True)
 async def handler(event):
-    me = event.client.get_me()
+    me = await event.client.get_me()
     if event.message.from_id != TANNER:
         return
     if "> exhausted miners:" not in event.message.message:
