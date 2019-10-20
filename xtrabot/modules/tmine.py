@@ -13,4 +13,4 @@ async def handler(event):
     if "me.first_name" in event.message.message:
         return
     await asyncio.sleep(2)
-    await bot.send_message(TCOIN, "!mine")
+    await event.client.send_message(TCOIN, "!mine")
