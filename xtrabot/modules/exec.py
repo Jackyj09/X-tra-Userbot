@@ -16,17 +16,19 @@
 
 from xtrabot import loader, utils
 from xtrabot.xtrautil import Module
-from telethon import events, errors, functions, types
 import inspect
 import traceback
-import asyncio
 import sys
+import subprocess
+from telethon.errors import MessageEmptyError, MessageTooLongError, MessageNotModifiedError
 import io
+import asyncio
+import time
 
-class Eval(loader.Module):
+class System(loader.Module):
     def __init__(self):
         self.name = "eval"
-        super().__init__(self.exc)
+        super().__init__([self.exc, self.bash])
         self.addxconfig("exec", "Processing...", "This is the Processing message when the script is being run")
 
     async def exc(self, event):
@@ -65,6 +67,24 @@ class Eval(loader.Module):
         final_output = "**EXC**: `{}` \n\n **OUTPUT**: \n`{}` \n".format(cmd, evaluation)
         await utils.answer(event, final_output)
 
+    async def bash(self, event):
+        DELAY_BETWEEN_EDITS = 0.3
+        PROCESS_RUN_TIME = 100
+        cmd = event.text.split(" ", maxsplit=1)[1]
+        reply_to_id = event.message.id
+        if event.reply_to_msg_id:
+            reply_to_id = event.reply_to_msg_id
+        start_time = time.time() + PROCESS_RUN_TIME
+        process = await asyncio.create_subprocess_shell(
+            cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+        )
+        OUTPUT = f"**QUERY:**\n__Command:__\n`{cmd}` \n__PID:__\n`{process.pid}`\n\n**Output:**\n"
+        stdout, stderr = await process.communicate()
+        if stderr.decode():
+            await utils.answer(event, f"{OUTPUT}`{stderr.decode()}`")
+            return
+        await await utils.answer(event, f"{OUTPUT}`{stdout.decode()}`")
+
     async def aexec(self, code, event):
         exec(
             f'async def __aexec(event): ' +
@@ -72,4 +92,4 @@ class Eval(loader.Module):
         )
         return await locals()['__aexec'](event)
 
-Module(Eval)
+Module(System)
