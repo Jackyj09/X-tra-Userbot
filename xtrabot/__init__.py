@@ -20,6 +20,7 @@ from telethon.tl.types import ChatBannedRights
 
 from distutils.util import strtobool as sb
 import os
+import xtrabot.xtrautil
 from dotenv import load_dotenv
 
 from pylast import LastFMNetwork, md5
