@@ -36,7 +36,7 @@ def start_module(shortname):
     sys.modules["userbot"] = userb
     sys.modules["uniborg"] = unib
     sys.modules["sql_helpers"] = sqlh   
-   try:
+    try:
         mod.Module
     except:
         mod.borg = uni.borg
