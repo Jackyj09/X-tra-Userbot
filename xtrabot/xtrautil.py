@@ -35,8 +35,11 @@ def start_module(shortname):
     name = "xtrabot.modules.{}".format(shortname)
     spec = importlib.util.spec_from_file_location(name, path)
     mod = importlib.util.module_from_spec(spec)
-    mod.borg = uni.borg
-    mod.Config = uni
+    try:
+        mod.Module
+    except:
+        mod.borg = uni.borg
+        mod.Config = uni
     spec.loader.exec_module(mod)
 
 class Module():
