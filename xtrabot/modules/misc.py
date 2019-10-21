@@ -27,14 +27,14 @@ class Misc(loader.Module):
 
     async def install(self, event):
         reply = await event.get_reply_message()
-        text = await event.reply("Processing...")
+        await utils.answer(event, "Processing...")
         hmm = await event.client.download_media(reply, self.xconfig["directory"])
         path = Path(hmm)
         try:
             start_module(path.stem.replace(".py", ""))
         except Exception as e:
-            await utils.answer(text, str(e))
+            await utils.answer(event, str(e))
             return
-        await utils.answer(text, self.xconfig["installed message"][0])
+        await utils.answer(event, self.xconfig["installed message"][0])
 
 Module(Misc)
