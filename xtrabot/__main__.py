@@ -22,7 +22,8 @@ import telethon
 import os
 from pathlib import Path
 import glob
-from xtrabot import xtrautil
+from xtrabot.xtrautil import start_module
+import xtrabot.xtrautil
 
 async def normal_start():
     await client.start()
@@ -37,7 +38,7 @@ for name in files:
     with open(name) as f:
         path1 = Path(f.name)
         shortname = path1.stem
-        xtrautil.start_module(shortname.replace(".py", ""))
+        start_module(shortname.replace(".py", ""))
 print("Your Userbot Is Working.")
 
 if len(argv) not in (1, 3, 4):
