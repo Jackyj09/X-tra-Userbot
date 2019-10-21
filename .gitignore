@@ -1,5 +1,12 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+xtrabot/__pycache__
+xtrabot/modules/__pycache__
+xtrabot/compat/__pycache__
+xtrabot/compat/userbot/__pycache__
+xtrabot/compat/userbot/sql_helper/__pycache__
+xtrabot/compat/uniborg/__pycache__
+xtrabot/compat/uniborg/sql_helpers/__pycache__
 *.py[cod]
 *$py.class
 
