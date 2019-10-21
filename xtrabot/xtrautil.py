@@ -25,17 +25,21 @@ import xtrabot.compat.userbot as userb
 import xtrabot.compat.uniborg as unib
 import xtrabot.compat.uniborg.sql_helpers as sqlh
 
+sys.modules["userbot.modules"] = userb
+sys.modules["userbot"] = userb
+sys.modules["uniborg"] = unib
+sys.modules["sql_helpers"] = sqlh    
+
 def start_module(shortname):
     path = Path(f"xtrabot/modules/{shortname}.py")
     name = "xtrabot.modules.{}".format(shortname)
     spec = importlib.util.spec_from_file_location(name, path)
     mod = importlib.util.module_from_spec(spec)
-    sys.modules["userbot.modules"] = userb
-    sys.modules["userbot"] = userb
-    sys.modules["uniborg"] = unib
-    sys.modules["sql_helpers"] = sqlh
-    mod.borg = uni.borg
-    mod.Config = uni
+    try:
+        mod.Module
+    except:
+        mod.borg = uni.borg
+        mod.Config = uni
     spec.loader.exec_module(mod)
 
 class Module():
