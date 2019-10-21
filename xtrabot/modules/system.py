@@ -83,7 +83,7 @@ class System(loader.Module):
         if stderr.decode():
             await utils.answer(event, f"{OUTPUT}`{stderr.decode()}`")
             return
-        await await utils.answer(event, f"{OUTPUT}`{stdout.decode()}`")
+        await utils.answer(event, f"{OUTPUT}`{stdout.decode()}`")
 
     async def aexec(self, code, event):
         exec(
