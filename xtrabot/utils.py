@@ -34,4 +34,4 @@ async def answer(event, text, **args):
             await event.delete()
     else:
         tmp = await action(text)
-        return [tmp]
+        return tmp
