@@ -89,4 +89,4 @@ async def do_echo(event, data):
 
 def format_reply(lines, prefix="="):
     reply = f"\n{prefix} ".join(lines)
-    return f"{prefix} {reply}\n"
+    return f"```{prefix} {reply}\n```"
