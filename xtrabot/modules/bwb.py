@@ -22,10 +22,14 @@ async def init(event):
 @loader.command(outgoing=True, pattern=r"!!+add wrap (\S) (\d+)")
 async def addwrap(event):
     nick = event.pattern_match.group(1)
-    usrid = event.pattern_match.group(2)
+    reply = await event.get_reply_message()
+    if reply == None:
+        usrid = event.pattern_match.group(2)
+    else:
+        usrid = reply.from_id
     if nick is None or usrid is None:
         return
-    wrap_users.update({nick: usrid})
+    wrap_users[nick] = int(usrid)
     await event.respond("Added {} with user_id of {} to wrap_users".format(nick, usrid))
 
 
