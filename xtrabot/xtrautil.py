@@ -37,7 +37,7 @@ def start_module(shortname):
     spec = importlib.util.spec_from_file_location(name, path)
     mod = importlib.util.module_from_spec(spec)
     try:
-        vars(mod)["Module"]
+        vars(mod)["start"](Module)
     except:
         mod.borg = uni.borg
         mod.Config = uni
