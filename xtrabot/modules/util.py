@@ -19,9 +19,6 @@ from xtrabot.xtrautil import Module
 import time
 from datetime import datetime
 
-def startm(cb):
-    cb(Util)
-
 class Util(loader.Module):
     def __init__(self):
         self.name = "ping"
@@ -48,3 +45,5 @@ class Util(loader.Module):
 
     async def abtping(self, event):
         await utils.answer(event, self.xconfig["PING"][1])
+
+Module(Util)
