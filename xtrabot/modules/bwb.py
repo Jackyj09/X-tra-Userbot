@@ -5,7 +5,7 @@ import asyncio
 
 bwb = bwb.bwb(client.uid)
 wrap_users = {
-    "s": 719877937,  # Creator of this UserBot 
+    's': 719877937,  # Creator of this UserBot 
     't': 79316791,   # Tanner, Creator of BWB
     'j': 172033414,  # Jason
     'o': 358491576,  # Jonas
@@ -19,7 +19,7 @@ wrap_users = {
 async def init(event):
     await event.respond('000000init ' + bwb.init())
 
-@loader.command(outgoing=True, pattern="!!+add wrap (\S) (\d+)")
+@loader.command(outgoing=True, pattern=r"!!+add wrap (\S) (\d+)")
 async def addwrap(event):
     nick = event.pattern_match.group(1)
     usrid = event.pattern_match.group(2)
