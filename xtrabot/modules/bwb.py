@@ -85,4 +85,4 @@ async def hs(event):
 
 async def do_echo(event, data):
         user = await event.get_sender()
-        await event.respond(format_reply([f"{user.first_name}: {data}"]))
+        await event.respond(f"`{user.first_name}`: `{data}`")
