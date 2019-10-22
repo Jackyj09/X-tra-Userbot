@@ -26,6 +26,8 @@ import xtrabot.compat.userbot as userb
 import xtrabot.compat.uniborg as unib
 import xtrabot.compat.uniborg.sql_helpers as sqlh
 
+logger = logging.getLogger(__name__)
+
 sys.modules["userbot.modules"] = userb
 sys.modules["userbot"] = userb
 sys.modules["uniborg"] = unib
@@ -46,7 +48,7 @@ def start_module(shortname):
         except:
             pass
         sys.modules["xtrabot.modules.{}".format(shortname)] = mod
-        mod.logger.info("Successfully imported {}".format(shortname))
+        logger.info("Successfully imported {}".format(shortname))
 
 class Module():
     def __init__(self, cls):
