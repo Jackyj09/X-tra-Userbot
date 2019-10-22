@@ -19,7 +19,7 @@ wrap_users = {
 async def init(event):
     await event.respond('000000init ' + bwb.init())
 
-@loader.command(outgoing=True, pattern=r"!!+add wrap (\S) (\d+)")
+@loader.command(outgoing=True, pattern=r"!!+add wrap (\S) ?(\d+)?")
 async def addwrap(event):
     nick = event.pattern_match.group(1)
     reply = await event.get_reply_message()
