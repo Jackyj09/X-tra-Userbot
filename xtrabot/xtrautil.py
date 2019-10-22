@@ -43,12 +43,8 @@ def start_module(shortname):
         mod.Config = uni
         mod.logger = logging.getLogger(shortname)
         spec.loader.exec_module(mod)
-        try:
-            mod.start(Module)
-        except:
-            pass
         sys.modules["xtrabot.modules.{}".format(shortname)] = mod
-        logger.info("Successfully imported {}".format(shortname))
+        print("Successfully imported {}".format(shortname))
 
 class Module():
     def __init__(self, cls):
