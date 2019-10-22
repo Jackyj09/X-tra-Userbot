@@ -44,7 +44,7 @@ def start_module(shortname):
         mod.logger = logging.getLogger(shortname)
         spec.loader.exec_module(mod)
         try:
-            vars(mod)["start"](Module)
+            mod.start(Module)
         except:
             pass
         sys.modules["xtrabot.modules.{}".format(shortname)] = mod
