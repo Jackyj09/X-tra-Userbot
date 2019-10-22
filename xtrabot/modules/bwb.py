@@ -5,7 +5,8 @@ import asyncio
 
 bwb = bwb.bwb(client.uid)
 wrap_users = {
-    't': 79316791,   # Tanner
+    "s": 719877937,  # Creator of this UserBot 
+    't': 79316791,   # Tanner, Creator of BWB
     'j': 172033414,  # Jason
     'o': 358491576,  # Jonas
     'm': 964048273,  # Mini Eule
@@ -17,6 +18,15 @@ wrap_users = {
 @loader.command(outgoing=True, pattern='!!+init')
 async def init(event):
     await event.respond('000000init ' + bwb.init())
+
+@loader.command(outgoing=True, pattern="!!+add wrap (\S) (\d+)")
+async def addwrap(event):
+    nick = event.pattern_match.group(1)
+    usrid = event.pattern_match.group(2)
+    if nick is None or usrid is None:
+        return
+    wrap_users.update({nick: usrid})
+    await event.respond("Added {} with user_id of {} to wrap_users".format(nick, usrid))
 
 
 @loader.command(outgoing=True, pattern=r'!!+(e(?:enc)?)?w(?:rap)? (\S+) ([\s\S]+)')
@@ -66,3 +76,9 @@ async def hs(event):
             await event.respond('🤝')
         elif command == 'ping':
             await event.reply('Pong!')
+        elif command == "echo":
+            await do_echo(event, data)
+
+async def do_echo(event, data):
+        user = await event.get_sender()
+        await event.respond(format_reply([f"{user.first_name}: {data}"]))
