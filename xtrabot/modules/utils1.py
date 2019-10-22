@@ -16,7 +16,7 @@
 
 from xtrabot import loader, utils
 from xtrabot.xtrautil import Module
-import timr
+import time
 from datetime import datetime
 
 class Util(loader.Module):
