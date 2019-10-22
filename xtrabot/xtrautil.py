@@ -32,18 +32,21 @@ sys.modules["uniborg"] = unib
 sys.modules["sql_helpers"] = sqlh
 
 def start_module(shortname):
-    path = Path(f"xtrabot/modules/{shortname}.py")
-    name = "xtrabot.modules.{}".format(shortname)
-    spec = importlib.util.spec_from_file_location(name, path)
-    mod = importlib.util.module_from_spec(spec)
-    try:
-        vars(mod)["start"](Module)
-    except:
+    if not shortname.startswith("_"):
+        path = Path(f"xtrabot/modules/{shortname}.py")
+        name = "xtrabot.modules.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
         mod.borg = uni.borg
         mod.Config = uni
-    mod.logger = logging.getLogger(shortname)
-    spec.loader.exec_module(mod)
-    sys.modules["xtrabot.modules.{}".format(shortname)] = mod
+        mod.logger = logging.getLogger(shortname)
+        spec.loader.exec_module(mod)
+        try:
+            vars(mod)["start"](Module)
+        except:
+            pass
+        sys.modules["xtrabot.modules.{}".format(shortname)] = mod
+        mod.logger.info("Successfully imported {}".format(shortname))
 
 class Module():
     def __init__(self, cls):
