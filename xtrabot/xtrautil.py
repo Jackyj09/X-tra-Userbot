@@ -20,6 +20,7 @@ from telethon import events
 import sys
 import importlib
 from pathlib import Path
+import logger
 
 import xtrabot.compat.userbot as userb
 import xtrabot.compat.uniborg as unib
@@ -36,10 +37,11 @@ def start_module(shortname):
     spec = importlib.util.spec_from_file_location(name, path)
     mod = importlib.util.module_from_spec(spec)
     try:
-        mod.Module
+        vars(mod)["Module"]
     except:
         mod.borg = uni.borg
         mod.Config = uni
+    mod.logger = logging.getLogger(shortname)
     spec.loader.exec_module(mod)
 
 class Module():
