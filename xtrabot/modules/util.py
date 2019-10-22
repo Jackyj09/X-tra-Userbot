@@ -35,8 +35,9 @@ class Util(loader.Module):
             info = event
         DMY = time.strftime("%d.%m.%Y")
         HM = time.strftime("%H:%M:%S")
+        TZ = time.strftime("%z")
         ms = (end - start).microseconds / 1000
-        textmsg = "ID = {}\nCHAT ID = {}\nDATE = {}\nTIME = {}\nPING = {}ms".format(info.id, info.chat_id, DMY, HM, ms)
+        textmsg = "`ID = {}\nCHAT ID = {}\nDATE = {}\nTIME = {} GMT{}\nPING = {}ms`".format(info.id, info.chat_id, DMY, HM, TZ, ms)
         await utils.answer(event, textmsg)
 
     async def help(self, event):
