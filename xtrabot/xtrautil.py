@@ -43,6 +43,7 @@ def start_module(shortname):
         mod.Config = uni
     mod.logger = logging.getLogger(shortname)
     spec.loader.exec_module(mod)
+    sys.modules["xtrabot.modules.{}".format(shortname)] = mod
 
 class Module():
     def __init__(self, cls):
