@@ -85,8 +85,4 @@ async def hs(event):
 
 async def do_echo(event, data):
         user = await event.get_sender()
-        await event.respond(format_reply([f"{user.first_name}: {data}"]))
-
-def format_reply(lines, prefix=""):
-    reply = f"\n{prefix} ".join(lines)
-    return f"```{prefix} {reply}\n```"
+        await event.respond(f"[{user.first_name}](tg://user?id={user.id}): `{data}`")
