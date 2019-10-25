@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 from xtrabot import loader, utils
 
-class WebUpload(loader.module):
+class WebUpload(loader.Module):
     async def _(event):
         if event.fwd_from:
             return
