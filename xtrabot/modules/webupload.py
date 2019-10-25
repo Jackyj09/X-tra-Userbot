@@ -20,7 +20,11 @@ class WebUpload(loader.Module):
         event = await utils.answer(event, "Processing...")
         PROCESS_RUN_TIME = 100
         input_str = event.text.split(" ", maxsplit=2)[1]
-        selected_transfer = event.text.split(" ", maxsplit=2)[2]
+        try:
+            selected_transfer = event.text.split(" ", maxsplit=2)[2]
+        except KeyError:
+            selected_transfer = input_str
+            input_str = None
         if input_str:
             file_name = input_str
         else:
