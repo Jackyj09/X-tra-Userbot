@@ -27,7 +27,7 @@ class Util(loader.Module):
 
     async def ping(self, event):
         start = datetime.now()
-        await utils.answer(event, self.xconfig["PING"][0])
+        event = await utils.answer(event, self.xconfig["PING"][0])
         end = datetime.now()
         if event.reply_to_msg_id:
             info = await event.get_reply_message()
