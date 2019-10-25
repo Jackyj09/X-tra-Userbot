@@ -12,7 +12,7 @@ from xtrabot.xtrautil import Module
 class WebUpload(loader.Module):
     def __init__(self):
         self.name = "webupload"
-        super().__init__(webupload)
+        super().__init__(self.webupload)
 
     async def webupload(self, event):
         if event.fwd_from:
