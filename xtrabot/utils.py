@@ -18,10 +18,6 @@ from xtrabot import TRUSTED_USERS, client
 import re
 
 async def answer(event, text, **args):
-    try:
-        event.edited
-    except:
-        args["call"] = "reply"
     call = args.get("call", "edit")
     actions = {"edit": event.edit, "reply": event.reply, "respond": event.respond}
     action = actions[call]
@@ -44,7 +40,6 @@ async def answer(event, text, **args):
             tmp = await action(text, reply_to=reply_to_id)
         else:
             tmp = await action(text)
-        tmp.edited = "yes"
         return tmp
 
 def regex(event, regex1):
