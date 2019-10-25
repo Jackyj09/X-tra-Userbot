@@ -11,7 +11,7 @@ from xtrabot import loader, utils
 class WebUpload(loader.module):
     async def _(event):
         if event.fwd_from:
-        return
+            return
         event = await utils.answer(event, "Processing...")
         PROCESS_RUN_TIME = 100
         input_str = event.text.split(" ", maxsplit=2)[1]
