@@ -32,7 +32,7 @@ class System(loader.Module):
         self.addxconfig("exec", "Processing...", "This is the Processing message when the script is being run")
 
     async def exc(self, event):
-        await utils.answer(event, self.xconfig["exec"][0])
+        event = await utils.answer(event, self.xconfig["exec"][0])
         cmd = event.text.split(" ", maxsplit=1)[1]
         reply_to_id = event.message.id
         if event.reply_to_msg_id:
