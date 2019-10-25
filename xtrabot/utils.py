@@ -14,11 +14,11 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from xtrabot import TRUSTED_USERS
+from xtrabot import TRUSTED_USERS, client
 import re
 
 async def answer(event, text, **args):
-    if event.from_id and event.from_id in TRUSTED_USERS:
+    if event.from_id is not client.uid and event.from_id in TRUSTED_USERS:
         try:
             event.edited
         except:
