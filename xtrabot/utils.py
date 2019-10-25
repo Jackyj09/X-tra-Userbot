@@ -18,11 +18,10 @@ from xtrabot import TRUSTED_USERS, client
 import re
 
 async def answer(event, text, **args):
-    if event.from_id is not client.uid and event.from_id in TRUSTED_USERS:
-        try:
-            event.edited
-        except:
-            args["call"] = "reply"
+    try:
+        event.edited
+    except:
+        args["call"] = "reply"
     call = args.get("call", "edit")
     actions = {"edit": event.edit, "reply": event.reply, "respond": event.respond}
     action = actions[call]
