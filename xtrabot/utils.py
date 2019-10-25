@@ -14,7 +14,14 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from xtrabot import TRUSTED_USERS
+
 async def answer(event, text, **args):
+    if event.from_id and event.from_id in TRUSTED_USERS:
+        try:
+            event.edited
+        except:
+            args["call"] = "reply"
     call = args.get("call", "edit")
     actions = {"edit": event.edit, "reply": event.reply, "respond": event.respond}
     action = actions[call]
@@ -33,5 +40,9 @@ async def answer(event, text, **args):
             )
             await event.delete()
     else:
-        tmp = await action(text)
+        if call == "reply" and event.reply_to_msg_id:
+            tmp = await action(text, reply_to=reply_to_id)
+        else:
+            tmp = await action(text)
+        tmp.edited = "yes"
         return tmp
