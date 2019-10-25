@@ -18,13 +18,10 @@ class WebUpload(loader.Module):
         if event.fwd_from:
             return
         event = await utils.answer(event, "Processing...")
+        match = utils.regex(event, r".webupload ?(.+?|) (anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles)")
         PROCESS_RUN_TIME = 100
-        input_str = event.text.split(" ", maxsplit=2)[1]
-        try:
-            selected_transfer = event.text.split(" ", maxsplit=2)[2]
-        except KeyError:
-            selected_transfer = input_str
-            input_str = None
+        input_str = match.group(1)
+        selected_transfer = match.group(2)
         if input_str:
             file_name = input_str
         else:
