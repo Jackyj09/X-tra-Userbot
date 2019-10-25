@@ -32,7 +32,7 @@ else:
 
 API_ID = os.environ.get("API_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
-trusted_users = os.environ.get("TRUSTED_USERS", None).split(" ")
+trusted_users = os.environ.get("TRUSTED_USERS", None).split(" ") if type(os.environ.get("TRUSTED_USERS", None)) == list else []
 TRUSTED_USERS = []
 for x in trusted_users:
     TRUSTED_USERS.append(int(x))
