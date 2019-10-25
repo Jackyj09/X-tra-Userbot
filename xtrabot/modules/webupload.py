@@ -7,9 +7,14 @@ import asyncio
 import time
 from pathlib import Path
 from xtrabot import loader, utils
+from xtrabot.xtrautil import Module
 
 class WebUpload(loader.Module):
-    async def _(event):
+    def __init__(self):
+        self.name = "webupload"
+        super().__init__(webupload)
+
+    async def webupload(self, event):
         if event.fwd_from:
             return
         event = await utils.answer(event, "Processing...")
@@ -20,7 +25,7 @@ class WebUpload(loader.Module):
             file_name = input_str
         else:
             reply = await event.get_reply_message()
-            file_name = await bot.download_media(reply.media, Var.TEMP_DOWNLOAD_DIRECTORY)
+            file_name = await event.client.download_media(reply.media, event.config.TEMP_DOWNLOAD_DIRECTORY)
         file_temp_name = Path(file_name).stem
         reply_to_id = event.message.id
         CMD_WEB = {"anonfiles": "curl -F \"file=@{}\" https://anonfiles.com/api/upload", "transfer": "curl --upload-file \"{}\" https://transfer.sh/{}", "filebin": "curl -X POST --data-binary \"@test.png\" -H \"filename: {}\" \"https://filebin.net\"", "anonymousfiles": "curl -F file=\"@{}\" https://api.anonymousfiles.io/", "megaupload": "curl -F \"file=@{}\" https://megaupload.is/api/upload", "bayfiles": ".exec curl -F \"file=@{}\" https://bayfiles.com/api/upload"}
@@ -36,3 +41,5 @@ class WebUpload(loader.Module):
         stdout, stderr = await process.communicate()
         output = f"**OUTPUT**:\n`{stdout.decode()}`\n\n**INFO**:\n`{stderr.decode()}`"
         await utils.answer(event, output)
+
+Module(WebUpload)
