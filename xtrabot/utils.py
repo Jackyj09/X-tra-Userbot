@@ -15,6 +15,7 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from xtrabot import TRUSTED_USERS
+import re
 
 async def answer(event, text, **args):
     if event.from_id and event.from_id in TRUSTED_USERS:
@@ -46,3 +47,8 @@ async def answer(event, text, **args):
             tmp = await action(text)
         tmp.edited = "yes"
         return tmp
+
+def regex(event, regex1):
+    regex1 = re.compile(regex1)
+    match = re.match(regex1, event.text)
+    return match
