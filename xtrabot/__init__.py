@@ -32,6 +32,10 @@ else:
 
 API_ID = os.environ.get("API_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
+trusted_users = os.environ.get("TRUSTED_USERS", None).split(" ")
+TRUSTED_USERS = []
+for x in trusted_users:
+    TRUSTED_USERS.append(int(x))
 class Var(object):
     DB_URI = os.environ.get("DATABASE_URL", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", None)
