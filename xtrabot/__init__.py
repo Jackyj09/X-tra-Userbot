@@ -32,7 +32,7 @@ else:
 
 API_ID = os.environ.get("API_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
-MOD_LIST
+MOD_LIST = []
 
 for x in trusted_users:
     TRUSTED_USERS.append(int(x))
