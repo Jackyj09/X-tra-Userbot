@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from xtrabot import loader, utils
+from xtrabot import loader, utils, MOD_LIST
 from xtrabot.xtrautil import Module
 import time
 from datetime import datetime
@@ -41,7 +41,11 @@ class Util(loader.Module):
         await utils.answer(event, textmsg)
 
     async def help(self, event):
-        await utils.answer(event, "No help yet.")
+        string = 'Available Modules:\n'
+        for i in MOD_LIST:
+            string += "\n  "+i+":\n"
+            for c in MOD_LIST[i]:
+                string += "    "+c+",\n"
 
     async def abtping(self, event):
         await utils.answer(event, self.xconfig["PING"][1])
