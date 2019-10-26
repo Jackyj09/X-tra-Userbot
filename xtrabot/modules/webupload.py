@@ -21,13 +21,13 @@ class WebUpload(loader.Module):
         await utils.answer(event, "Processing...")
         match = utils.regex(event, "^.webupload ?(.+?|) --(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles)")
         PROCESS_RUN_TIME = 100
-        input_str = match.group(1) if match.group(1) else None
+        input_str = match.group(1)
         selected_transfer = match.group(2)
         if input_str:
             file_name = input_str
         else:
             reply = await event.get_reply_message()
-            file_name = await self.client.download_media(reply.media, event.config.TEMP_DOWNLOAD_DIRECTORY+"/tmp")
+            file_name = await self.client.download_media(reply.media, self.config.TEMP_DOWNLOAD_DIRECTORY+"/tmp")
         file_temp_name = Path(file_name).stem
         reply_to_id = event.message.id
         CMD_WEB = {"anonfiles": "curl -F \"file=@{}\" https://anonfiles.com/api/upload", "transfer": "curl --upload-file \"{}\" https://transfer.sh/{}", "filebin": "curl -X POST --data-binary \"@test.png\" -H \"filename: {}\" \"https://filebin.net\"", "anonymousfiles": "curl -F file=\"@{}\" https://api.anonymousfiles.io/", "megaupload": "curl -F \"file=@{}\" https://megaupload.is/api/upload", "bayfiles": ".exec curl -F \"file=@{}\" https://bayfiles.com/api/upload"}
