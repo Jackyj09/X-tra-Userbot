@@ -42,10 +42,21 @@ class Util(loader.Module):
 
     async def help(self, event):
         string = 'Available Modules:\n'
-        for i in MOD_LIST:
-            string += "\n  "+i+":\n"
-            for c in MOD_LIST[i]:
-                string += "    "+c+",\n"
+        match = utils.regex(event, ".help ?(.*)")
+        module = match.group(1)
+        if module:
+            try:
+                string += "\n  "+i+":\n"
+                for c in MOD_LIST[i]:
+                    string += "    "+c+",\n"
+            except KeyError:
+                await utils.answer(event, "Invalid Module Selected")
+        else:
+            for i in MOD_LIST:
+                string += "\n  "+i+":\n"
+                for c in MOD_LIST[i]:
+                    string += "    "+c+",\n"
+        await utils.answer(event, string)
 
     async def abtping(self, event):
         await utils.answer(event, self.xconfig["PING"][1])
