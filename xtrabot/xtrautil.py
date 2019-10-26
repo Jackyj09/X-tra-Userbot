@@ -36,6 +36,7 @@ sys.modules["sql_helpers"] = sqlh
 def start_module(shortname):
     if not shortname.startswith("_"):
         try:
+            MOD_LIST[shortname] = []
             mod = importlib.import_module("xtrabot.modules." + shortname)
         except:
             path = Path(f"xtrabot/modules/{shortname}.py")
@@ -45,9 +46,9 @@ def start_module(shortname):
             mod.borg = uni.borg
             mod.Config = uni
             mod.logger = logging.getLogger(shortname)
+            MOD_LIST[shortname] = []
             spec.loader.exec_module(mod)
             sys.modules["xtrabot.modules.{}".format(shortname)] = mod
-        MOD_LIST[shortname] = []
         print("Successfully imported {}".format(shortname))
 
 class Module():
