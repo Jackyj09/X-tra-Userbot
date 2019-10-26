@@ -14,12 +14,13 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/
 
-from xtrabot import PPESupport as ppe, UniSupport as uni
+from xtrabot import PPESupport as ppe, UniSupport as uni, MOD_LIST
 import re
 from telethon import events
 class SupportMods():
     def uniadmin(self, pattern=None, **args):
         args["pattern"] = re.compile(uni.COMMAND_HAND_LER + pattern)
+        MOD_LIST[list(MOD_LIST.keys())[-1]].append("."+pattern)
         if "allow sudo" in args:
             del args["allow_sudo"]
         if "allow_edited_updates" in args:
@@ -34,6 +35,7 @@ class SupportMods():
                     del args[i]
                 elif i is not "incoming":
                     del args[i]
+            MOD_LIST[list(MOD_LIST.keys())[-1]].append(args["pattern"])
             def decorator(func):
                 client.add_event_handler(func, events.NewMessage(**args))
                 return func
