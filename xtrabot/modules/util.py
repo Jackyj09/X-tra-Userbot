@@ -46,16 +46,17 @@ class Util(loader.Module):
         module = match.group(1)
         if module:
             try:
-                string += "\n  "+i+":\n"
-                for c in MOD_LIST[i]:
-                    string += "    "+c+",\n"
+                string += "\n  **"+module+"**:\n"
+                for c in MOD_LIST[module]:
+                    string += "    `"+c+"`,\n"
             except KeyError:
                 await utils.answer(event, "Invalid Module Selected")
+                return
         else:
             for i in MOD_LIST:
-                string += "\n  "+i+":\n"
+                string += "\n  **"+i+"**:\n"
                 for c in MOD_LIST[i]:
-                    string += "    "+c+",\n"
+                    string += "    `"+c.replace("^", "").replace("\\.", ".")+"`,\n"
         await utils.answer(event, string)
 
     async def abtping(self, event):
