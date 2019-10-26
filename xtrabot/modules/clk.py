@@ -12,7 +12,7 @@ async def enaclk(event):
         person = await m.get_sender()
         user=person.first_name
         rantext = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(7))
-        api_token = '32f9105a8194b5596482f0ed9631ab1483ec171e'
+        api_token = '1787b5d9471113f711514f0b33fb5d592de27218'
         req = requests.get('https://ilinkshort.com/api?api={}&url={}&alias={}'.format(api_token, m.text, rantext)).json()
         if(req["status"] == 'error'):
           smsg = req["message"]
