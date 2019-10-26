@@ -39,7 +39,7 @@ class Module():
                 self.xconfig = xconfig
                 self.client = client
                 self.config = Var
-                MOD_LIST[list(MOD_LIST.keys())[-1]].append(funcmd)
+                MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
                 client.add_event_handler(func, events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
