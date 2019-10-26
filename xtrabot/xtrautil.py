@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from xtrabot import UniSupport as uni, client, PPESupport as ppe
+from xtrabot import UniSupport as uni, client, PPESupport as ppe, MOD_LIST
 import re
 from telethon import events
 import sys
