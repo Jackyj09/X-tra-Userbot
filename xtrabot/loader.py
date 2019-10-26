@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from xtrabot import client, Var
+from xtrabot import client, Var, MOD_LIST
 from telethon import events
 import re
 xconfig = {}
@@ -39,6 +39,7 @@ class Module():
                 self.xconfig = xconfig
                 self.client = client
                 self.config = Var
+                MOD_LIST[list(MOD_LIST.keys())[-1]].append(funcmd)
                 client.add_event_handler(func, events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
