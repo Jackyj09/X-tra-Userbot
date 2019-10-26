@@ -48,7 +48,7 @@ class Util(loader.Module):
             try:
                 string += "\n  **"+module+"**:\n"
                 for c in MOD_LIST[module]:
-                    string += "    `"+c+"`,\n"
+                    string += "    `"+c.replace("^", "").replace("\\.", ".")+"`,\n"
             except KeyError:
                 await utils.answer(event, "Invalid Module Selected")
                 return
