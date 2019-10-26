@@ -46,6 +46,7 @@ class Module():
         self.xconfig.update({name: [value, about]})
 
 def command(**args):
+    MOD_LIST[list(MOD_LIST.keys())[-1]].append(args["pattern"])
     def decorator(func):
         client.add_event_handler(func, events.NewMessage(**args))
     return decorator
