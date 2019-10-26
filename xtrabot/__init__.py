@@ -32,7 +32,7 @@ else:
 
 API_ID = os.environ.get("API_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
-MOD_LIST = []
+MOD_LIST = {}
 
 class Var(object):
     DB_URI = os.environ.get("DATABASE_URL", None)
