@@ -87,7 +87,7 @@ class System(loader.Module):
 
     async def aexec(self, code, event):
         exec(
-            f'async def __aexec(event): ' +
+            f'async def __aexec(self, event): ' +
             ''.join(f'\n {l}' for l in code.split('\n'))
         )
         return await locals()['__aexec'](event)
