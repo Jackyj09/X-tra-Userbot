@@ -21,7 +21,7 @@ class WebUpload(loader.Module):
         await utils.answer(event, "Processing...")
         match = utils.regex(event, "^.webupload ?(.+?|) --(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles)")
         PROCESS_RUN_TIME = 100
-        input_str = match.group(1)
+        input_str = match.group(1) if match.group(1) else None
         selected_transfer = match.group(2)
         if input_str:
             file_name = input_str
