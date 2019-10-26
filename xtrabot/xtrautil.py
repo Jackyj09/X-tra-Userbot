@@ -42,6 +42,7 @@ def start_module(shortname):
         mod.borg = uni.borg
         mod.Config = uni
         mod.logger = logging.getLogger(shortname)
+        MOD_LIST[shortname] = []
         spec.loader.exec_module(mod)
         sys.modules["xtrabot.modules.{}".format(shortname)] = mod
         print("Successfully imported {}".format(shortname))
