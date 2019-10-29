@@ -16,12 +16,13 @@
 
 from xtrabot import loader, utils
 from xtrabot.xtrautil import start_module, Module
+import os, requests
 from pathlib import Path
 
 class Misc(loader.Module):
     def __init__(self):
         self.name = "misc"
-        super().__init__(self.install)
+        super().__init__([self.install, self.dlmod])
         self.addxconfig("installed message", "Yay, this module has been added to your module pack!!", "the message to the left is the one pops up when the module is installed")
         self.addxconfig("directory", "xtrabot/modules/", "is the modules directory")
 
@@ -36,5 +37,16 @@ class Misc(loader.Module):
             await utils.answer(event, str(e))
             return
         await utils.answer(event, self.xconfig["installed message"][0])
+
+    async def dlmod(self, event):
+        await utils.answer(event, "Processing Module...")
+        url = event.text.split(" ")[1]
+        response = requests.get(url)
+        file_name = url.split("/")[-1]
+        t_file = open(self.xconfig["directory"][0]+file_name,"w")
+        t_file.write(response.text)
+        t_file.close()
+        start_module(file_name.split(".")[1])
+        await utils.answer(event, self.xconfig["installed message"][0]+f"\nModule is {file_name}")
 
 Module(Misc)
