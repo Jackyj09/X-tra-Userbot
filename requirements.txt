@@ -1,4 +1,4 @@
-telethon
+https://github.com/LonamiWebs/Telethon/archive/master.zip
 Pillow>=5.3.0
 PyGithub
 aiofiles
