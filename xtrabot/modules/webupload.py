@@ -27,7 +27,7 @@ class WebUpload(loader.Module):
             file_name = input_str
         else:
             reply = await event.get_reply_message()
-            file_name = await self.client.download_media(reply.media, self.config.TEMP_DOWNLOAD_DIRECTORY+"/tmp")
+            file_name = await self.client.download_media(reply.media, self.config.TEMP_DOWNLOAD_DIRECTORY+"/")
         file_temp_name = Path(file_name).stem
         reply_to_id = event.message.id
         CMD_WEB = {"anonfiles": "curl -F \"file=@{}\" https://anonfiles.com/api/upload", "transfer": "curl --upload-file \"{}\" https://transfer.sh/{}", "filebin": "curl -X POST --data-binary \"@test.png\" -H \"filename: {}\" \"https://filebin.net\"", "anonymousfiles": "curl -F file=\"@{}\" https://api.anonymousfiles.io/", "megaupload": "curl -F \"file=@{}\" https://megaupload.is/api/upload", "bayfiles": ".exec curl -F \"file=@{}\" https://bayfiles.com/api/upload"}
