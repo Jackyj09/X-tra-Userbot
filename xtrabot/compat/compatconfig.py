@@ -31,13 +31,13 @@ class SupportMods():
         return events.NewMessage(**args)
     class PPESupport():
         def register(self, **args):
-            for i in args:
-                if i is not "pattern":
-                    del args[i]
-                elif i is not "outgoing":
-                    del args[i]
-                elif i is not "incoming":
-                    del args[i]
+            tmp = {}
+            tmp["pattern"] = args.get("pattern", None)
+            tmp["outgoing"] = args.get("outgoing", None)
+            tmp["incoming"] = args.get("incoming", None)
+            del args
+            args = tmp
+            del tmp
             try:
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append(args["pattern"])
             except:
