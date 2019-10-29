@@ -46,7 +46,7 @@ class Misc(loader.Module):
         t_file = open(self.xconfig["directory"][0]+file_name,"w")
         t_file.write(response.text)
         t_file.close()
-        start_module(file_name.split(".")[1])
+        start_module(file_name.split(".")[0])
         await utils.answer(event, self.xconfig["installed message"][0]+f"\nModule is {file_name}")
 
 Module(Misc)
