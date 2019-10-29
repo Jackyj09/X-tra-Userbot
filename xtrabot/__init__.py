@@ -26,8 +26,8 @@ from subprocess import call
 from pylast import LastFMNetwork, md5
 
 # for the latest version of telethon
-call("pip install --upgrade pip".split(" "))
-call("pip3 install -U https://github.com/LonamiWebs/Telethon/archive/master.zip".split(" "))
+call("pip install --upgrade pip".split(" "), stdout="log.txt", stderr="log.txt")
+call("pip3 install -U https://github.com/LonamiWebs/Telethon/archive/master.zip".split(" "), stdout="log.txt", stderr="log.txt")
 
 ENV = os.environ.get("ENV", False)
 if not bool(ENV):
