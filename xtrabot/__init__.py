@@ -21,13 +21,13 @@ from telethon.tl.types import ChatBannedRights
 from distutils.util import strtobool as sb
 import os
 from dotenv import load_dotenv
-from subprocess import call
+from subprocess import call, PIPE
 
 from pylast import LastFMNetwork, md5
 
 # for the latest version of telethon
-call("pip install --upgrade pip".split(" "), stdout="log.txt", stderr="log.txt")
-call("pip3 install -U https://github.com/LonamiWebs/Telethon/archive/master.zip".split(" "), stdout="log.txt", stderr="log.txt")
+call("pip install --upgrade pip".split(" "), stdout=PIPE, stderr=PIPE)
+call("pip3 install -U https://github.com/LonamiWebs/Telethon/archive/master.zip".split(" "), stdout=PIPE, stderr=PIPE)
 
 ENV = os.environ.get("ENV", False)
 if not bool(ENV):
