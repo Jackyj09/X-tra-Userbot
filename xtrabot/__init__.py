@@ -22,6 +22,7 @@ from distutils.util import strtobool as sb
 import os
 from dotenv import load_dotenv
 from subprocess import call, PIPE
+import logging
 
 from pylast import LastFMNetwork, md5
 
@@ -38,6 +39,16 @@ else:
 API_ID = os.environ.get("API_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
 MOD_LIST = {}
+
+class ModLogger(logging.basicConfig):
+    def __init__(self, mode):
+        if mode == "setup":
+            super().__init__(filename="log.txt", level=logging.WARNING)
+
+    def log(name):
+        return logging.getLogger(name)
+
+ModLogger("setup")
 
 class Var(object):
     DB_URI = os.environ.get("DATABASE_URL", None)
