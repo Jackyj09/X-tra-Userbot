@@ -27,3 +27,5 @@ class LogMod(loader.Module):
         with open("log.txt", "r") as file1:
             logs = file1.read()
         await utils.answer(rep, f"`{logs}`")
+
+Module(LogMod)
