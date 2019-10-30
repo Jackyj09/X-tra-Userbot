@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from xtrabot import client, Var, MOD_LIST
+from xtrabot import client, Var, MOD_LIST, ModLogger
 from telethon import events
 import re
 xconfig = {}
@@ -37,6 +37,7 @@ class Module():
                 except KeyError:
                     func_name.update({self.name: [func]})
                 self.xconfig = xconfig
+                self.logger = ModLogger.log(self.name)
                 self.client = client
                 self.config = Var
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
