@@ -40,10 +40,10 @@ API_ID = os.environ.get("API_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
 MOD_LIST = {}
 
-class ModLogger(logging.basicConfig):
+class ModLogger():
     def __init__(self, mode):
         if mode == "setup":
-            super().__init__(filename="log.txt", level=logging.WARNING)
+            logging.basicConfig(filename="log.txt", level=logging.WARNING)
 
     def log(name):
         return logging.getLogger(name)
