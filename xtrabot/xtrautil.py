@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from xtrabot import UniSupport as uni, client, PPESupport as ppe, MOD_LIST
+from xtrabot import UniSupport as uni, client, PPESupport as ppe, MOD_LIST, ModLogger
 import re
 from telethon import events
 import sys
@@ -49,6 +49,7 @@ def start_module(shortname):
             MOD_LIST[shortname] = []
             spec.loader.exec_module(mod)
             sys.modules["xtrabot.modules.{}".format(shortname)] = mod
+        mod.logger = ModLogger.log(shortname)
         print("Successfully imported {}".format(shortname))
 
 class Module():
