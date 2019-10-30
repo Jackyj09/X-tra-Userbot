@@ -37,7 +37,6 @@ class Misc(loader.Module):
             await utils.answer(event, str(e))
             return
         await utils.answer(event, self.xconfig["installed message"][0])
-        lk
 
     async def dlmod(self, event):
         await utils.answer(event, "Processing Module...")
