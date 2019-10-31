@@ -48,7 +48,7 @@ class Module():
                     except Exception as error:
                         await event.reply("__Error occured on the current cmd__, __do__ `.log` __to show the latest log.__")
                         self.logger.exception(error)
-                client.add_event_handler(tmp, event.NewMessage(pattern=funcmd, outgoing=True))
+                client.add_event_handler(tmp, events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
         self.xconfig.update({name: [value, about]})
