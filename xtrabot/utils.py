@@ -15,7 +15,7 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from xtrabot import client
-import re
+import re, io
 
 async def answer(event, text, **args):
     call = args.get("call", "edit")
