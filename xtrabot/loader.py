@@ -16,6 +16,7 @@
 
 from xtrabot import client, Var, MOD_LIST, ModLogger
 from telethon import events
+import traceback
 import re
 xconfig = {}
 func_name = {}
@@ -41,7 +42,13 @@ class Module():
                 self.client = client
                 self.config = Var
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
-                client.add_event_handler(func, events.NewMessage(pattern=funcmd, outgoing=True))
+                @client.on(event.NewMessage(pattern=funcmd, outgoing=True))
+                async def tmp(event):
+                    try:
+                        func(event)
+                    except Exception as error:
+                        await event.reply("__Error occured on the current cmd__, __do__ `.log` __to show the latest log.__")
+                        self.logger.exception(error)
 
     def addxconfig(self, name, value, about=""):
         self.xconfig.update({name: [value, about]})
