@@ -55,7 +55,7 @@ class Module():
     def __init__(self, cls):
         try:
             cls()
-        except Exception as e:
-            print(e)
+        except Exception as error:
+            traceback.print_exc()
 
 
