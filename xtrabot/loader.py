@@ -42,9 +42,9 @@ class Module():
                 self.client = client
                 self.config = Var
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
-                async def tmp(self, event):
+                async def tmp(event):
                     try:
-                        await func(self, event)
+                        await func(event)
                     except Exception as error:
                         await event.reply("__Error occured on the current cmd__, __do__ `.log` __to show the latest log.__")
                         self.logger.exception(error)
