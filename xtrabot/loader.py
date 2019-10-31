@@ -45,7 +45,7 @@ class Module():
                 @client.on(event.NewMessage(pattern=funcmd, outgoing=True))
                 async def tmp(event):
                     try:
-                        func(self, event)
+                        await func(self, event)
                     except Exception as error:
                         await event.reply("__Error occured on the current cmd__, __do__ `.log` __to show the latest log.__")
                         self.logger.exception(error)
