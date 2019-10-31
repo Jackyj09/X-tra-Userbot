@@ -20,7 +20,7 @@ from telethon import events
 import sys
 import importlib
 from pathlib import Path
-import logging
+import logging, traceback
 
 import xtrabot.compat.userbot as userb
 import xtrabot.compat.uniborg as unib
