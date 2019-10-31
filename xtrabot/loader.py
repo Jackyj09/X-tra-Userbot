@@ -42,13 +42,13 @@ class Module():
                 self.client = client
                 self.config = Var
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
-                @client.on(event.NewMessage(pattern=funcmd, outgoing=True))
                 async def tmp(event):
                     try:
-                        await func(self, event)
+                        await func(event)
                     except Exception as error:
                         await event.reply("__Error occured on the current cmd__, __do__ `.log` __to show the latest log.__")
                         self.logger.exception(error)
+                client.add_event_handler(tmp, event.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
         self.xconfig.update({name: [value, about]})
