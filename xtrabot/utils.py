@@ -35,6 +35,8 @@ async def answer(event, text, **args):
                 reply_to=reply_to_id
             )
             await event.delete()
+        tmp = await action("Send A Text Instead")
+        return tmp
     else:
         if call == "reply" and event.reply_to_msg_id:
             tmp = await action(text, reply_to=reply_to_id)
