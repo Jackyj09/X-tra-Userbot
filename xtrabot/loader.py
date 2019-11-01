@@ -46,13 +46,14 @@ class Module():
                 self.config = Var
                 self.sfunc = func
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
-                exec("""async def {}(self, event):
+                s ="""async def {}(self, event):
     try:
         await self.sfunc(self, event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         self.logger.exception(error)
-        await event.respond(traceback.format_exc())""".format(func.__name__, "."+func.__name__))
+        await event.respond(traceback.format_exc())""".format(func.__name__, "."+func.__name__)
+                exec(s)
                 setattr(self, locals()[func.__name__].__name__, types.MethodType(locals()[func.__name__], self))
                 client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=funcmd, outgoing=True))
 
