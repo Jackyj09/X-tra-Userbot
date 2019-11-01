@@ -55,6 +55,8 @@ class Module():
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         comp.logger.exception(error)""".format(func.__name__, "."+func.__name__)
                 exec(s)
+                del globals()["func"]
+                del globals()["comp"]
                 client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
