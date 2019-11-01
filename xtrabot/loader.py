@@ -32,8 +32,7 @@ class Module():
             self.name = "untitled"
         if type(funct) is not list:
             funct = [funct]
-        for i in funct:
-            func = i
+        for func in funct:
             if 1==1:
                 funcmd = re.compile("^."+func.__name__)
                 try:
@@ -47,7 +46,7 @@ class Module():
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
                 exec("""async def {}(event):
     try:
-        await func(self, event)
+        await func(event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         self.logger.exception(error)
