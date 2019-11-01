@@ -47,7 +47,7 @@ class Module():
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
                 exec("""async def {}(event):
     try:
-        await func(event)
+        await func(self, event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         self.logger.exception(error)
