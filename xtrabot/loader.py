@@ -49,8 +49,8 @@ class Module():
     try:
         await func(event)
     except Exception as error:
-        await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__".format("."+func.__name__))
-        self.logger.exception(error)""".format(func.__name__)
+        await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
+        self.logger.exception(error)""".format(func.__name__, "^."+func.__name__))
                 client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
