@@ -46,12 +46,11 @@ class Module():
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
                 exec("""async def {}(event):
     try:
-        func = {}
         await func(event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         self.logger.exception(error)
-        await event.respond(traceback.format_exc())""".format(func.__name__, func, "."+func.__name__))
+        await event.respond(traceback.format_exc())""".format(func.__name__, "."+func.__name__))
                 client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
