@@ -47,7 +47,7 @@ class Module():
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
                 vars()["func"+func.__name__] = func
                 vars()["comp"+func.__name__] = self
-                s ="""async def {}(event, func=func{}, comp=self{}):
+                s ="""async def {}(event, func=func, comp=self):
     try:
         await func(event)
     except Exception as error:
