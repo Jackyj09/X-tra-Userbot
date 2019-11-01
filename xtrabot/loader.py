@@ -48,7 +48,7 @@ class Module():
                 globals()["func"+func.__name__] = func
                 globals()["comp"+func.__name__] = self
                 s ="""async def {}(event):
-    na = {}
+    na = \'{}\'
     func = globals()[\"func\"+na]
     comp = globals()[\"comp\"+na]
     try:
