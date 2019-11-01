@@ -45,14 +45,16 @@ class Module():
                 self.client = client
                 self.config = Var
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
-                globals()["func"+func.__name__] = func
-                globals()["comp"+func.__name__] = self
+                locals()["func"+func.__name__] = func
+                locals()["comp"+func.__name__] = self
                 s ="""async def {}(event):
+    global func{}
+    global comp{}
     try:
         await func(event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
-        comp.logger.exception(error)""".format(func.__name__, "."+func.__name__)
+        comp.logger.exception(error)""".format(func.__name__,func.__name__,func.__name__, "."+func.__name__)
                 exec(s)
                 vars(locals()[func.__name__])["func"] = func
                 vars(locals()[func.__name__])["comp"] = self
