@@ -23,6 +23,8 @@ async def answer(event, text, **args):
     action = actions[call]
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
+    else:
+        reply_to_id = event.id
     if len(text) > 4095:
         with io.BytesIO(str.encode(text)) as out_file:
             out_file.name = "result.txt"
