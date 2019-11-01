@@ -17,6 +17,7 @@
 from xtrabot import client, Var, MOD_LIST, ModLogger
 from telethon import events
 import traceback
+import types
 import re
 xconfig = {}
 func_name = {}
@@ -43,15 +44,16 @@ class Module():
                 self.logger = ModLogger.log(self.name)
                 self.client = client
                 self.config = Var
+                self.sfunc = func
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
-                exec("""async def {}(event):
+                exec("""async def {}(self, event):
     try:
-        global func
-        await func(self, event)
+        await self.sfunc(self, event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         self.logger.exception(error)
         await event.respond(traceback.format_exc())""".format(func.__name__, "."+func.__name__))
+                setattr(self, locals()[func.__name__], types.MethodType(locals()[func.__name__], self))
                 client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
