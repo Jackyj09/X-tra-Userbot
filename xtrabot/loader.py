@@ -48,7 +48,6 @@ class Module():
                 globals()["func"] = func
                 globals()["comp"] = self
                 s ="""async def {}(event):
-    comp = globals()[\"comp\"]
     try:
         await func(event)
     except Exception as error:
