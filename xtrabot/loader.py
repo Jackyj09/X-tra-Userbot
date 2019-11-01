@@ -45,19 +45,15 @@ class Module():
                 self.client = client
                 self.config = Var
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
-                locals()["func"+func.__name__] = func
-                locals()["comp"+func.__name__] = self
-                s ="""async def {}(event):
-    global func{}
-    global comp{}
+                vars()["func"+func.__name__] = func
+                vars()["comp"+func.__name__] = self
+                s ="""async def {}(event, func=func{}, comp=self{}):
     try:
         await func(event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         comp.logger.exception(error)""".format(func.__name__,func.__name__,func.__name__, "."+func.__name__)
-                exec(s)
-                vars(locals()[func.__name__])["func"] = func
-                vars(locals()[func.__name__])["comp"] = self
+                exec(s, None, locals)
                 client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
