@@ -51,11 +51,12 @@ class Module():
         await comp.sfunc(comp, event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
-        self.logger.exception(error)
+        comp.logger.exception(error)
         await event.respond(traceback.format_exc())""".format(func.__name__, "."+func.__name__)
                 exec(s)
-                setattr(locals()[func.__name__], "comp", self)
-                client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=funcmd, outgoing=True))
+                fun = locals()[func.__name__]
+                setattr(fun, "comp", self)
+                client.add_event_handler(fun, events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
         self.xconfig.update({name: [value, about]})
