@@ -44,13 +44,13 @@ class Module():
                 self.logger = ModLogger.log(self.name)
                 self.client = client
                 self.config = Var
-                self.sfunc = func
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
+                globals()["func"] = func
                 globals()["comp"] = self
                 s ="""async def {}(event):
     comp = globals()[\"comp\"]
     try:
-        await comp.sfunc(event)
+        await func(event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         comp.logger.exception(error)""".format(func.__name__, "."+func.__name__)
