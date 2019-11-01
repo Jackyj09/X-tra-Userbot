@@ -44,7 +44,7 @@ class Module():
                 self.logger = ModLogger.log(self.name)
                 self.client = client
                 self.config = Var
-                self.self_func
+                self.self_func = func
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
                 async def tmp(event):
                     try:
