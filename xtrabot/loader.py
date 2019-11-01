@@ -44,16 +44,14 @@ class Module():
                 self.logger = ModLogger.log(self.name)
                 self.client = client
                 self.config = Var
-                self.self_func = func
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
-                async def tmp(event):
-                    try:
-                        await self.self_func(event)
-                    except Exception as error:
-                        await event.reply("__Error occured on the current cmd__, __do__ `.log` __to show the latest log.__")
-                        self.logger.exception(error)
-                setattr(FuncS, func.__name__, tmp)
-                client.add_event_handler(tmp, events.NewMessage(pattern=funcmd, outgoing=True))
+                exec("""async def func.__name__(event):
+    try:
+        await func(event)
+    except Exception as error:
+        await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__".format("."+func.__name__))
+        self.logger.exception(error)""")
+                client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
         self.xconfig.update({name: [value, about]})
