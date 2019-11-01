@@ -48,7 +48,7 @@ class ModLogger():
     def log(name):
         return logging.getLogger(name)
 
-ModLogger("setup")
+ModLogger("setu")
 
 class Var(object):
     DB_URI = os.environ.get("DATABASE_URL", None)
