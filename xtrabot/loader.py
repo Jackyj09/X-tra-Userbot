@@ -55,7 +55,7 @@ class Module():
         await event.respond(traceback.format_exc())""".format(func.__name__, "."+func.__name__)
                 exec(s)
                 fun = locals()[func.__name__]
-                setattr(fun, "comp", self)
+                locals()["comp"] = self
                 client.add_event_handler(fun, events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
