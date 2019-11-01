@@ -43,7 +43,7 @@ MOD_LIST = {}
 class ModLogger():
     def __init__(self, mode):
         if mode == "setup":
-            logging.basicConfig(filename="log.txt", level=logging.WARNING)
+            logging.basicConfig(filename="log.txt", filemode='w', level=logging.WARNING)
 
     def log(name):
         return logging.getLogger(name)
