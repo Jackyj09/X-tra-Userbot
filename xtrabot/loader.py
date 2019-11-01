@@ -21,6 +21,9 @@ import re
 xconfig = {}
 func_name = {}
 
+class FuncS:
+    pass
+
 class Module():
     def __init__(self, funct):
         try:
@@ -48,7 +51,8 @@ class Module():
                     except Exception as error:
                         await event.reply("__Error occured on the current cmd__, __do__ `.log` __to show the latest log.__")
                         self.logger.exception(error)
-                client.add_event_handler(tmp, events.NewMessage(pattern=funcmd, outgoing=True))
+                setattr(FuncS, func.__name__, tmp)
+                client.add_event_handler(getattr(FuncS, func.__name__), events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
         self.xconfig.update({name: [value, about]})
