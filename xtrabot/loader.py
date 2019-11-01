@@ -50,11 +50,10 @@ class Module():
                 s ="""async def {}(event):
     comp = globals()[\"comp\"]
     try:
-        await comp.sfunc(comp, event)
+        await comp.sfunc(event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
-        comp.logger.exception(error)
-        await event.respond(traceback.format_exc())""".format(func.__name__, "."+func.__name__)
+        comp.logger.exception(error)""".format(func.__name__, "."+func.__name__)
                 exec(s)
                 fun = locals()[func.__name__]
                 client.add_event_handler(fun, events.NewMessage(pattern=funcmd, outgoing=True))
