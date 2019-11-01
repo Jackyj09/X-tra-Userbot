@@ -46,7 +46,9 @@ class Module():
                 self.config = Var
                 self.sfunc = func
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
+                globals()["comp"] = self
                 s ="""async def {}(event):
+    comp = globals()[\"comp\"]
     try:
         await comp.sfunc(comp, event)
     except Exception as error:
@@ -55,7 +57,6 @@ class Module():
         await event.respond(traceback.format_exc())""".format(func.__name__, "."+func.__name__)
                 exec(s)
                 fun = locals()[func.__name__]
-                locals()["comp"] = self
                 client.add_event_handler(fun, events.NewMessage(pattern=funcmd, outgoing=True))
 
     def addxconfig(self, name, value, about=""):
