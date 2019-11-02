@@ -29,5 +29,4 @@ def run():
     app.run(threaded=True, port=5000)
 
 def keep_alive():
-    server = Thread(target=run)
-    server.start()
+    run()
