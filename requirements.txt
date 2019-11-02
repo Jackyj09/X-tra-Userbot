@@ -14,7 +14,6 @@ cowpy
 cryptg
 dnspython
 emoji
-flask
 forbiddenfruit
 gTTS-token>=1.1.3
 gTTS>=2.0.1
@@ -24,7 +23,6 @@ google-auth-oauthlib
 google_images_download>=2.7.1
 googletrans>=2.4.0
 gsearch
-gunicorn
 hachoir
 heroku3
 httplib2
@@ -54,3 +52,10 @@ telegraph
 urbandict>=0.5
 wikipedia>=1.4.0
 youtube-dl
+Click==7.0
+Flask==1.1.1
+gunicorn==19.9.0
+itsdangerous==1.1.0
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+Werkzeug==0.15.6
