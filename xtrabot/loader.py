@@ -49,6 +49,7 @@ class Module():
     from xtrabot import client, trustUser
     if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
         event2 = await event.respond("Processing,")
+        event2.text = event.text
     elif event.from_id == (await client.get_me()).id:
         event2 = event
     else:
@@ -57,7 +58,7 @@ class Module():
         await func(event2)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
-        self.logger.exception(error)""".format(func.__name__,func.__name__,func.__name__, "."+func.__name__)
+        self.logger.exception(error)""".format(func.__name__,"."+func.__name__)
                 exec(s, None, locals())
                 client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=funcmd))
 
