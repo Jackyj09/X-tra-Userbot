@@ -1,1 +1,1 @@
-web: gunicorn app:app && python -m xtrabot
+web: python -m xtrabot && gunicorn app:app
