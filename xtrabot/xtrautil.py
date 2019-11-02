@@ -34,7 +34,7 @@ sys.modules["userbot"] = userb
 sys.modules["uniborg"] = unib
 sys.modules["sql_helpers"] = sqlh
 
-uni.borg.on = SupportMods().UNISupport().reggie
+uni.borg.on = SupportMods().UNISupport().reggie()
 
 def start_module(shortname):
     if not shortname.startswith("_"):
