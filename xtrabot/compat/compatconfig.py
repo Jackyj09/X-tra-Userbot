@@ -14,21 +14,41 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/
 
-from xtrabot import PPESupport as ppe, UniSupport as uni, MOD_LIST, client
+from xtrabot import PPESupport as ppe, UniSupport as uni, MOD_LIST, client, ModLogger
 import re
 from telethon import events
 class SupportMods():
-    def uniadmin(self, pattern=None, **args):
-        args["pattern"] = re.compile(uni.COMMAND_HAND_LER + pattern)
-        MOD_LIST[list(MOD_LIST.keys())[-1]].append("."+pattern)
-        if not "outgoing" in args:
-            if not "incoming" in args:
-               args["outgoing"] = True 
-        if "allow sudo" in args:
-            del args["allow_sudo"]
-        if "allow_edited_updates" in args:
-            del args["allow_edited_updates"]
-        return events.NewMessage(**args)
+    class UNISupport():
+        def __init__(self):
+            logger = ModLogger.log(func.__name__)
+        def reggie(func, events):
+            s ="""async def {}(event, func=func, logger=logger):
+    from xtrabot import client, trustUser
+    if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
+        event2 = await event.respond("Processing,")
+        event2.text = event.text
+    elif event.from_id == (await client.get_me()).id:
+        event2 = event
+    else:
+        return
+    try:
+        await func(event2)
+    except Exception as error:
+        await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
+        logger.exception(error)""".format(func.__name__,"."+func.__name__)
+            exec(s, None, locals())
+            client.add_event_handler(locals()[func.__name__], events)
+        def uniadmin(self, pattern=None, **args):
+            args["pattern"] = re.compile(uni.COMMAND_HAND_LER + pattern)
+            MOD_LIST[list(MOD_LIST.keys())[-1]].append("."+pattern)
+            if not "outgoing" in args:
+                if not "incoming" in args:
+                   args["outgoing"] = True 
+            if "allow sudo" in args:
+                del args["allow_sudo"]
+            if "allow_edited_updates" in args:
+                del args["allow_edited_updates"]
+            return events.NewMessage(**args)
     class PPESupport():
         def register(self, **args):
             tmp = {}
@@ -43,7 +63,23 @@ class SupportMods():
             except:
                 pass
             def decorator(func):
-                client.add_event_handler(func, events.NewMessage(**args))
+                logger = ModLogger.log(func.__name__)
+                s ="""async def {}(event, func=func, logger=logger):
+    from xtrabot import client, trustUser
+    if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
+        event2 = await event.respond("Processing,")
+        event2.text = event.text
+    elif event.from_id == (await client.get_me()).id:
+        event2 = event
+    else:
+        return
+    try:
+        await func(event2)
+    except Exception as error:
+        await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
+        logger.exception(error)""".format(func.__name__,"."+func.__name__)
+                exec(s, None, locals())
+                client.add_event_handler(locals()[func.__name__], events.NewMessage(**args))
                 return func
             return decorator
 
