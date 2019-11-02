@@ -21,7 +21,7 @@ class SupportMods():
     class UNISupport():
         def __init__(self):
             logger = ModLogger.log(func.__name__)
-        def reggie(func, events):
+        def reggie(self, func, events):
             s ="""async def {}(event, func=func, logger=logger):
     from xtrabot import client, trustUser
     if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
