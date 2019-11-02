@@ -22,8 +22,8 @@ import telethon
 import os
 from pathlib import Path
 import glob
-import text
 from xtrabot.xtrautil import start_module
+from subprocess import call
 import xtrabot.xtrautil
 
 async def normal_start():
@@ -46,5 +46,5 @@ if len(argv) not in (1, 3, 4):
     client.disconnect()
 else:
     client.run_until_disconnected()
-    text.keep_alive()
+    call("gunicorn text:app".split(" "))
 
