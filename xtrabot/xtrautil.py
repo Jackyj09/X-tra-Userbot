@@ -21,7 +21,7 @@ import sys
 import importlib
 from pathlib import Path
 import logging, traceback
-from compat.compatconfig import SupportMods
+from .compat.compatconfig import SupportMods
 
 import xtrabot.compat.userbot as userb
 import xtrabot.compat.uniborg as unib
