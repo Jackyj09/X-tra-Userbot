@@ -17,7 +17,6 @@
 # https://repl.it/talk/learn/Hosting-discordpy-bots-with-replit/11008
 
 from flask import Flask
-from threading import Thread
 
 app = Flask(__name__)
 
@@ -26,4 +25,4 @@ def main():
     return "Your bot is alive!"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(threaded=True, port=5000)
