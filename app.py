@@ -17,12 +17,13 @@
 # https://repl.it/talk/learn/Hosting-discordpy-bots-with-replit/11008
 
 from flask import Flask
-from subprocess import call
+import os
 
 app = Flask(__name__)
 
 @app.route('/')
 def main():
+    os.system("python -m xtrabot")
     return "Your bot is alive!"
 
 if __name__ == "__main__":
