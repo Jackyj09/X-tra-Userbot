@@ -22,6 +22,7 @@ import telethon
 import os
 from pathlib import Path
 import glob
+import text as web1
 from xtrabot.xtrautil import start_module
 import xtrabot.xtrautil
 
@@ -45,4 +46,5 @@ if len(argv) not in (1, 3, 4):
     client.disconnect()
 else:
     client.run_until_disconnected()
+    web1.keep_alive()
 
