@@ -22,7 +22,7 @@ class SupportMods():
         def reggie(self, events):
             def decorator(func):
                 self.logger = ModLogger.log(func.__name__)
-                s ="""async def {}(event, func=func, logger=logger, self=self):
+                s ="""async def {}(event, func=func, self=self):
     from xtrabot import client, trustUser
     if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
         event2 = await event.respond("Processing,")
