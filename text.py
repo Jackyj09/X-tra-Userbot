@@ -25,8 +25,5 @@ app = Flask(__name__)
 def main():
     return "Your bot is alive!"
 
-def run():
+if __name__ == "__main__":
     app.run(threaded=True, port=5000)
-
-def keep_alive():
-    run()
