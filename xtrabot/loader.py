@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from xtrabot import client, Var, MOD_LIST, ModLogger
+from xtrabot import client, Var, MOD_LIST, ModLogger, trustUser
 from telethon import events
 import traceback
 import types
@@ -45,9 +45,15 @@ class Module():
                 self.client = client
                 self.config = Var
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append("^."+func.__name__)
-                s ="""async def {}(event, func=func, self=self):
+                s ="""async def {}(event, func=func, self=self, client=client):
+    if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
+        event2 = await event.respond("Processing,")
+    elif event.from_id == (await client.get_me()).id:
+        event2 = event
+    else:
+        return
     try:
-        await func(event)
+        await func(event2)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         self.logger.exception(error)""".format(func.__name__,func.__name__,func.__name__, "."+func.__name__)
