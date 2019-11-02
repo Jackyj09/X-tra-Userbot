@@ -17,6 +17,7 @@
 # https://repl.it/talk/learn/Hosting-discordpy-bots-with-replit/11008
 
 from flask import Flask
+from subprocess import call
 
 app = Flask(__name__)
 
@@ -26,3 +27,4 @@ def main():
 
 if __name__ == "__main__":
     app.run(threaded=True, port=5000)
+    call("python -m xtrabot".split(" "))
