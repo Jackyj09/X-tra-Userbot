@@ -22,7 +22,7 @@ from xtrabot.compat.compatconfig import SupportMods
 
 from telethon.tl.functions.messages import GetPeerDialogsRequest
 
-admin_cmd = SupportMods().uniadmin
+admin_cmd = SupportMods().UNISupport().uniadmin
 
 async def is_read(borg, entity, message, is_out=None):
     """
