@@ -20,9 +20,9 @@ from telethon import events
 class SupportMods():
     class UNISupport():
         def __init__(self):
-            logger = ModLogger.log(func.__name__)
+            self.logger = ModLogger.log(func.__name__)
         def reggie(self, func, events):
-            s ="""async def {}(event, func=func, logger=logger):
+            s ="""async def {}(event, func=func, logger=logger, self=self):
     from xtrabot import client, trustUser
     if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
         event2 = await event.respond("Processing,")
@@ -35,7 +35,7 @@ class SupportMods():
         await func(event2)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
-        logger.exception(error)""".format(func.__name__,"."+func.__name__)
+        self.logger.exception(error)""".format(func.__name__,"."+func.__name__)
             exec(s, None, locals())
             client.add_event_handler(locals()[func.__name__], events)
         def uniadmin(self, pattern=None, **args):
