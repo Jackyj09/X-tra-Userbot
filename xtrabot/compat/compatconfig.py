@@ -19,9 +19,8 @@ import re
 from telethon import events
 class SupportMods():
     class UNISupport():
-        def __init__(self):
-            self.logger = ModLogger.log(func.__name__)
         def reggie(self, func, events):
+            self.logger = ModLogger.log(func.__name__)
             s ="""async def {}(event, func=func, logger=logger, self=self):
     from xtrabot import client, trustUser
     if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
