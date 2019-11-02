@@ -19,8 +19,8 @@ import re
 from telethon import events
 class SupportMods():
     class UNISupport():
-        def reggie(self):
-            def decorator(func, events):
+        def reggie(self, events):
+            def decorator(func):
                 self.logger = ModLogger.log(func.__name__)
                 s ="""async def {}(event, func=func, logger=logger, self=self):
     from xtrabot import client, trustUser
