@@ -24,6 +24,7 @@ google-auth-oauthlib
 google_images_download>=2.7.1
 googletrans>=2.4.0
 gsearch
+gunicorn
 hachoir
 heroku3
 httplib2
