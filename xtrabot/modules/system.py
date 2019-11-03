@@ -86,10 +86,9 @@ class System(loader.Module):
         await utils.answer(event, f"{OUTPUT}`{stdout.decode()}`")
 
     async def aexec(self, code, event):
-        exec(
+        exec(compile(
             f'async def __aexec(self, event): ' +
-            ''.join(f'\n {l}' for l in code.split('\n'))
-        )
+            ''.join(f'\n {l}' for l in code.split('\n')), 'aexec', 'exec'))
         return await locals()['__aexec'](self, event)
 
 Module(System)
