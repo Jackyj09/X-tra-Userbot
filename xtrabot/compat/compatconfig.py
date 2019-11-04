@@ -52,13 +52,6 @@ class SupportMods():
             return events.NewMessage(**args)
     class PPESupport():
         def register(self, **args):
-            tmp = {}
-            tmp["pattern"] = args.get("pattern", None)
-            tmp["outgoing"] = args.get("outgoing", None)
-            tmp["incoming"] = args.get("incoming", None)
-            del args
-            args = tmp
-            del tmp
             try:
                 MOD_LIST[list(MOD_LIST.keys())[-1]].append(args["pattern"])
             except:
@@ -80,7 +73,7 @@ class SupportMods():
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         logger.exception(error)""".format(func.__name__,"."+func.__name__)
                 exec(s, None, locals())
-                client.add_event_handler(locals()[func.__name__], events.NewMessage(**args))
+                client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=args["pattern"]))
                 return func
             return decorator
 
