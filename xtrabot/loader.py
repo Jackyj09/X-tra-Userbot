@@ -49,13 +49,13 @@ class Module():
     from xtrabot import client, trustUser
     if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
         event2 = await event.respond("Processing,")
-        event2.text = event.text
+        event.edit = event2.edit
     elif event.from_id == (await client.get_me()).id:
-        event2 = event
+        pass
     else:
         return
     try:
-        await func(event2)
+        await func(event)
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         self.logger.exception(error)""".format(func.__name__,"."+func.__name__)
