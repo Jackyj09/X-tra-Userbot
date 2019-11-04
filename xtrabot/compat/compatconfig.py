@@ -73,7 +73,7 @@ class SupportMods():
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         logger.exception(error)""".format(func.__name__,"."+func.__name__)
                 exec(s, None, locals())
-                client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=args["pattern"]))
+                client.add_event_handler(locals()[func.__name__], events.NewMessage(pattern=args["pattern"],outgoing=True,incoming=True))
                 return func
             return decorator
 
