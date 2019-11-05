@@ -64,6 +64,7 @@ class SupportMods():
                 logger = ModLogger.log(func.__name__)
                 s ="""async def {}(event, func=func, logger=logger, kwargs=kwargs):
     from xtrabot import client, trustUser
+    from telethon.events import StopPropagation
     if event.from_id in trustUser and event.from_id != (await client.get_me()).id:
         event2 = await event.respond("Processing,")
         event.edit = event2.edit
@@ -76,6 +77,8 @@ class SupportMods():
         return
     try:
         await func(event)
+    except StopPropagation:
+        pass
     except Exception as error:
         await event.reply("__Error occured on the current__ `{}`, __do__ `.log` __to show the latest log.__")
         logger.exception(error)""".format(func.__name__,"."+func.__name__)
