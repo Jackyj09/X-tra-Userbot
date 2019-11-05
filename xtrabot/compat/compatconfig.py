@@ -61,7 +61,6 @@ class SupportMods():
                 kwargs["pattern"] = args["pattern"] if "pattern" in args else None
                 kwargs["outgoing"] = args["outgoing"] if "outgoing" in args else False
                 kwargs["incoming"] = args["incoming"] if "incoming" in args else False
-                del args
                 logger = ModLogger.log(func.__name__)
                 s ="""async def {}(event, func=func, logger=logger, kwargs=kwargs):
     from xtrabot import client, trustUser
