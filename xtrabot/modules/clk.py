@@ -12,8 +12,8 @@ async def enaclk(event):
         person = await m.get_sender()
         user=person.first_name
         rantext = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(7))
-        api_token = '1787b5d9471113f711514f0b33fb5d592de27218'
-        req = requests.get('https://ilinkshort.com/api?api={}&url={}&alias={}'.format(api_token, m.text, rantext)).json()
+        api_token = '76deaa3cd6cad9f9c533f8c14845c919c12973fd'
+        req = requests.get('https://earnload.com/api?api={}&url={}&alias={}'.format(api_token, m.text, rantext)).json()
         if(req["status"] == 'error'):
           smsg = req["message"]
         else:
